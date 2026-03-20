@@ -1,0 +1,13 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {   
+        Set<Integer> ans=new HashSet<>();
+        int n=0;
+        for(int i:nums){
+            if(!ans.contains(i)){
+                ans.add(i);
+                nums[n++]=i;
+            }
+        }
+        return n;
+    }
+}
