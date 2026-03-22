@@ -1,1 +1,24 @@
-
+class Solution {
+    public int maxSubArray(int[] nums) {
+       int sum=0,maxsum=Integer.MIN_VALUE;
+       int left=0,right=0,templeft=0;
+       for(int i=0;i<nums.length;i++){
+        if(sum==0){
+             templeft=i;
+        }
+        sum+=nums[i];
+        if(sum>maxsum){
+            left=templeft;
+            right=i;
+            maxsum=sum;
+        }
+        if(sum<0){
+            sum=0;
+        }
+       }
+       for(int i=left;i<=right;i++){
+        System.out.print(nums[i]+" ");
+       }
+       return maxsum;
+    }
+}
