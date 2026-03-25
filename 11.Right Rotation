@@ -1,0 +1,44 @@
+class Solution {
+    public void rotate(int[] arr, int k) {
+        int n=arr.length;
+        k=k%n;
+        Reverse(arr,0,n-1);
+        Reverse(arr,0,k-1);
+        Reverse(arr,k,n-1);
+        // optimal
+        // Better
+        // int n = arr.length;
+        // if (n == 0) return;
+        // int r = k % n;
+        // if (r == 0) return;
+        // int temp[] = new int[r];
+        // for (int i = 0; i < r; i++) {
+        //     temp[i] = arr[n - r + i];
+        // }
+        // for (int i = n - r - 1; i >= 0; i--) {
+        //     arr[i + r] = arr[i];
+        // }
+        // for (int i = 0; i < r; i++) {
+        //     arr[i] = temp[i];
+        // }
+        // Brute force
+        // int rotation=k%n;
+        // while(rotation!=0){
+        //     int temp=arr[n-1];
+        //     for(int i=n-1;i>0;i--){
+        //         arr[i]=arr[i-1];
+        //     }
+        //     arr[0]=temp;
+        //     rotation--;
+        // }
+    }
+    public void Reverse(int nums[],int s,int e){
+        while(s<e){
+            int temp=nums[s];
+            nums[s]=nums[e];
+            nums[e]=temp;
+            s++;
+            e--;
+        }
+    }
+}
