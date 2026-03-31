@@ -1,0 +1,19 @@
+package Recursion;
+
+import java.util.*;
+public class printsomethingntimes {
+    static int count=0,n;
+    static void printntimes(){
+        if(n==count){
+            return;
+        }
+        System.out.println("VIRAT KOHLI");
+        count++;
+        printntimes();
+    }
+   public static void main(String[] args) {
+     Scanner sc=new Scanner(System.in);
+     n=sc.nextInt();
+     printntimes();
+   }
+}
