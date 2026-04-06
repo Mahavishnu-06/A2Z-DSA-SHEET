@@ -1,0 +1,18 @@
+class Solution {
+    public int mostFrequentElement(int[] nums) {
+      Map<Integer,Integer> freq=new TreeMap<>();
+      for(int i:nums){
+        freq.put(i,freq.getOrDefault(i,0)+1);
+      }
+      int max=Integer.MIN_VALUE,key=0;
+      for(int i:freq.keySet()){
+        if(freq.get(i)>max){
+            max=freq.get(i);
+            key=i;
+        }
+      }
+      return key;
+    }
+}
+
+
