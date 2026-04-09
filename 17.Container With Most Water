@@ -1,0 +1,26 @@
+class Solution {
+    public int maxArea(int[] h) {
+        int n=h.length;
+        int left=0,right=n-1,max=Integer.MIN_VALUE;
+        while(left<right){
+            int width=right-left;
+            int height=Math.min(h[left],h[right]);
+            max=Math.max(max,width*height);
+            if(h[left]<h[right]){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return max;  
+        //    Brute force
+        // int width=Integer.MIN_VALUE,max=Integer.MIN_VALUE;
+        // for(int i=0;i<h.length;i++){
+        //     for(int j=i+1;j<h.length;j++){
+        //         int min=Math.min(h[i],h[j]);
+        //         max=Math.max(max,min*(j-i));
+        //     }
+        // }
+        // return max;
+    }
+}
