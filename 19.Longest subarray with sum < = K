@@ -1,3 +1,9 @@
+Approach: Use sliding window with two pointers. Expand right pointer to add elements, and shrink from left when sum exceeds k to maintain valid subarray, tracking maximum length.
+
+Time Complexity: O(n) — each element is processed at most twice (once by right, once by left).
+
+Space Complexity: O(1) — only variables used, no extra data structures.
+
 import java.util.*;
 public class Largestsumk {
     public static void main(String[] args) {
@@ -16,8 +22,9 @@ public class Largestsumk {
                 sum-=arr[left];
                 left++;
             }
+            if(sum<=k){
             maxlen=Math.max(maxlen,right-left+1);
-            
+            }
             right++;
         }
         System.out.println(maxlen);
