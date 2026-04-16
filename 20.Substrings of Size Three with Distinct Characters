@@ -1,0 +1,48 @@
+Approach: Iterate through string and check every substring of length 3 by comparing characters directly to ensure all are distinct.
+
+Time Complexity: O(n) — single pass checking fixed-size substrings.
+
+Space Complexity: O(1) — no extra data structures used.
+
+class Solution {
+    public int countGoodSubstrings(String s) {
+        int count=0;
+          for (int i = 0; i <= s.length() - 3; i++) {
+            char a = s.charAt(i);
+            char b = s.charAt(i + 1);
+            char c = s.charAt(i + 2);
+            if (a != b && a != c && b != c) {
+                count++;
+            }
+        }
+        // int left=0,right=0,n=s.length(),count=0;
+        // Set<Character> set=new HashSet<>();
+        // while(right<n){
+        //     while(set.contains(s.charAt(right))){
+        //         set.remove(s.charAt(left));
+        //         left++;
+        //     }
+        //     set.add(s.charAt(right));
+        //     if(right-left+1==3){
+        //         count++;
+        //         set.remove(s.charAt(left));
+        //         left++;
+        //     }
+        //     right++;
+        // }
+        return count;
+        //brute force
+        // int count=0;
+        // for(int i=0;i<=s.length()-3;i++){
+        //     Set<Character> set=new HashSet<>();
+        //     String str= s.substring(i,3+i);
+        //     for(int j=0;j<str.length();j++){
+        //         set.add(str.charAt(j));
+        //     }
+        //     if(set.size()==3){
+        //         count++;
+        //     }
+        // }
+        // return count;
+    }
+}
