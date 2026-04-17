@@ -1,0 +1,43 @@
+Approach: Use sliding window with two pointers. Expand right, count zeros, and shrink from left when zeros exceed k to maintain valid window, tracking maximum length.
+
+Time Complexity: O(n) — each element is visited at most twice (left and right pointers).
+
+Space Complexity: O(1) — only variables used, no extra space.
+
+class Solution {
+    public int longestOnes(int[] arr, int k) {
+        int left=0,right=0,n=arr.length,maxlen=0,count=0;
+        while(right<n){
+           if(arr[right]==0){
+            count++;
+           }
+            if(count>k){
+                if(arr[left]==0){
+                    count--;
+                }
+                left++;
+            }
+           if(count<=k){
+            maxlen=Math.max(maxlen,right-left+1);
+           }
+           right++;
+        }
+        return maxlen;
+        // while(right<n){
+        //    if(arr[right]==0){
+        //     count++;
+        //    }
+        //     while(count>k){
+        //         if(arr[left]==0){
+        //             count--;
+        //         }
+        //         left++;
+        //     }
+        //    if(count<=k){
+        //     maxlen=Math.max(maxlen,right-left+1);
+        //    }
+        //    right++;
+        // }
+        // return maxlen;
+    }
+}
