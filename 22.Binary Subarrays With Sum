@@ -6,18 +6,36 @@ Space Complexity: O(1) — no extra data structures used.
 
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        int count=0,n=nums.length;
-        for(int i=0;i<n;i++){
-            int sum=0;
-            for(int j=i;j<n;j++){
-                sum+=nums[j];
-                if(sum==goal){
-                    count++;
-                }
-                if(sum>goal){
-                    break;
-                }
+        return subarray(nums,goal)-subarray(nums,goal-1);
+        // Brute force
+        // int count=0,n=nums.length;
+        // for(int i=0;i<n;i++){
+        //     int sum=0;
+        //     for(int j=i;j<n;j++){
+        //         sum+=nums[j];
+        //         if(sum>goal){
+        //             break;
+        //         }
+        //         if(sum==goal){
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
+    }
+    public int subarray(int[] nums,int g){
+        int left=0,right=0,n=nums.length,count=0,sum=0;
+        while(right<n){
+            if(g<0){
+                return 0;
             }
+             sum+=nums[right];
+             while(sum>g){
+                sum-=nums[left];
+                left++;
+             }
+             count+=(right-left+1);
+             right++;
         }
         return count;
     }
