@@ -1,0 +1,26 @@
+Approach: Use sliding window allowing at most one zero. Expand right, and shrink from left when zeros exceed one, tracking maximum window size (excluding one element).
+
+Time Complexity: O(n) — each element is processed at most twice by the pointers.
+
+Space Complexity: O(1) — only variables used, no extra space.
+class Solution {
+    public int longestSubarray(int[] arr) {
+        int left=0,right=0,n=arr.length,count=0,maxlen=0;
+        while(right<n){
+            if(arr[right]==0){
+                count++;
+            }
+            while(count>1){
+                if(arr[left]==0){
+                    count--;
+                }
+                left++;
+            }
+            if(count<=1){
+                maxlen=Math.max(maxlen,right-left);
+            }
+            right++;
+        }
+        return maxlen;
+    }
+}
