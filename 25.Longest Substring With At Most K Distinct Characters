@@ -1,0 +1,26 @@
+Approach: Use sliding window with HashMap to store character frequencies. Expand window, and shrink from left when distinct characters exceed k, tracking maximum valid substring length.
+
+Time Complexity: O(n) — each character is added and removed at most once.
+
+Space Complexity: O(k) — HashMap stores at most k distinct characters.
+
+class Solution {
+    public int kDistinctChar(String s, int k) {
+        Map<Character,Integer> map=new HashMap<>();
+        int left=0,right=0,n=s.length(),maxlen=0;
+        char ch[]=s.toCharArray();
+        while(right<n){
+           map.put(ch[right],map.getOrDefault(ch[right],0)+1);
+           while(map.size()>k){
+            map.put(ch[left],map.getOrDefault(ch[left],0)-1);
+            if(map.get(ch[left])==0){
+                map.remove(ch[left]);
+            }
+            left++;
+           }
+           maxlen=Math.max(maxlen,right-left+1);
+           right++;
+        }
+        return maxlen;
+    }
+}
