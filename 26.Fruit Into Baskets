@@ -1,0 +1,25 @@
+Approach: Use sliding window with HashMap to store fruit frequencies. Expand window, and when more than two fruit types exist, shrink from left until only two remain, tracking maximum length.
+
+Time Complexity: O(n) — each element is added and removed at most once.
+
+Space Complexity: O(1) — HashMap stores at most 3 fruit types, so constant space.
+
+class Solution {
+    public int totalFruits(int[] f) {
+      int left=0,right=0,n=f.length,maxlen=0;
+      Map<Integer,Integer> map=new HashMap<>();
+      while(right<n){
+         map.put(f[right],map.getOrDefault(f[right],0)+1);
+         while(map.size()>2){
+            map.put(f[left],map.getOrDefault(f[left],0)-1);
+            if(map.get(f[left])==0){
+                map.remove(f[left]);
+            }
+            left++;
+         }
+         maxlen=Math.max(maxlen,right-left+1);
+         right++;
+      }
+      return maxlen;
+    }
+}
