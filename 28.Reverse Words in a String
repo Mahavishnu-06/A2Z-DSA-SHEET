@@ -1,0 +1,31 @@
+Approach: Split the string into words, reverse the word array using recursion, then join the words back with spaces and trim extra spaces.
+
+Time Complexity: O(n) — splitting, reversing, and joining together take linear time.
+
+Space Complexity: O(n) — extra space used for storing split words.
+
+class Solution {
+    public String reverseWords(String s) {
+        String arr[]=s.split("\\s+");
+        int i=0,j=arr.length-1;
+        arr=reverse(arr,i,j);
+        return String.join(" ",arr).trim();
+        // brute force
+        // String arr[]=s.split("\\s+");
+        // StringBuilder sb=new StringBuilder();
+        // for(int i=arr.length-1;i>=0;i--){
+        //    sb.append(arr[i]);
+        // sb.append(" ");
+        // }
+        // return sb.toString().trim();
+    }
+    public String[] reverse(String str[],int i,int j){
+        if(i>=j){
+           return str;
+        }
+        String temp=str[i];
+        str[i]=str[j];
+        str[j]=temp;
+        return reverse(str,i+1,j-1);
+    }    
+}
