@@ -1,0 +1,36 @@
+Approach: Use sliding window with frequency array to track counts of 'a', 'b', and 'c'. When all three are present, count all valid substrings from current right and shrink the window.
+
+Time Complexity: O(n) — each character is added and removed at most once.
+
+Space Complexity: O(1) — fixed-size frequency array used.
+
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int left=0,right=0,count=0,n=s.length();
+        int freq[]=new int[3];
+        while(right<n){
+           freq[s.charAt(right)-'a']++;
+           while(freq[0]>0 && freq[1]>0 && freq[2]>0){
+            count+=n-right;
+            freq[s.charAt(left)-'a']--;
+            left++;
+           }
+           right++;
+        }
+        return count;
+        // Brute force
+        // int count=0;
+        // for(int i=0;i<s.length();i++){
+        //     List<Character> ans=new ArrayList<>();
+        //     for(int j=i;j<s.length();j++){
+        //        ans.add(s.charAt(j));
+        //        if(ans.contains('a') && ans.contains('b') && ans.contains('c')){
+        //         count+=s.length()-j;
+        //         break;
+        //        }
+        //     }
+            
+        // }
+        // return count;
+    }
+}
