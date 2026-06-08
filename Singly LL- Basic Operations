@@ -1,0 +1,195 @@
+class LinkedList{
+    class Node{
+        int value;
+        Node next;
+        Node(int value){
+            this.value=value;
+            this.next=null;
+        }
+    }
+    Node head,tail,temp;
+    int size=0;
+    void insertFirst(int val){
+        Node newnode=new Node(val);
+        if(head==null){
+            head=newnode;
+            tail=newnode;
+        }else{
+            newnode.next=head;
+            head=newnode;
+        }
+        size++;
+    }
+    void insertLast(int val){
+        Node newnode=new Node(val);
+         if(head==null){
+            head=newnode;
+            tail=newnode;
+        }else{
+            tail.next=newnode;
+            tail=newnode;
+        }
+        size++;
+    }
+    void insertatanyPos(int pos,int val){
+        Node newnode=new Node(val);
+        if(pos<0 || pos>size){
+            System.out.println("Invalid Position");
+            return;
+        }else if(pos==0){
+            insertFirst(val);
+            return;
+        }
+        else if(pos==size){
+            insertLast(val);
+            return;
+        }else{
+            temp=head;
+            for(int i=1;i<pos;i++){
+                temp=temp.next;
+            }
+            newnode.next=temp.next;
+            temp.next=newnode;
+        }
+        size++;
+    }
+    void deleteFirst(){
+        if(head==null){
+            System.out.println("List is Empty");
+            return;
+        }else if(size==1){
+            head=null;
+            tail=null;
+        }
+        else{
+            head=head.next;
+        }
+        size--;
+    }
+    void deleteLast(){
+        if(head==null){
+            System.out.println("List is Empty");
+            return;
+        }else if(size==1){
+            head=null;
+            tail=null;
+        }
+         else{
+            temp=head;
+            for(int i=1;i<size-1;i++){
+                temp=temp.next;
+            }
+            temp.next=null;
+            tail=temp;
+        }
+        size--;
+    }
+    void deleteatanyPos(int pos){
+        if(pos<0 || pos>=size){
+            System.out.println("Invalid Position");
+            return;
+        }else if(pos==0){
+            deleteFirst();
+            return; 
+        }else if(pos==size-1){
+            deleteLast();
+            return;
+        }
+        else{
+            temp=head;
+            for(int i=1;i<pos;i++){
+                temp=temp.next;
+            }
+            temp.next=temp.next.next;
+        }
+        size--;
+    }
+    void deletion(int val){
+        temp=head;
+        Node sectemp=head;
+        while(temp!=null){
+            if(temp.value==val){
+                sectemp.next=temp.next;
+                return;
+            }else{
+                sectemp=temp;
+                temp=temp.next;
+            }
+        }
+    }
+    void search(int ele){
+        temp=head;
+        int pos=0;
+        while(temp!=null){
+            if(temp.value==ele){
+                System.out.println("Element exist at position "+pos);
+                return;
+            }
+            pos++;
+            temp=temp.next;
+        }
+        System.out.println("Element doesn't exist");
+    }
+    void sum(){
+        temp=head;
+        int sum=0;
+        while(temp!=null){
+            sum+=temp.value;
+            temp=temp.next;
+        }
+        System.out.println(sum);
+    }
+    void max(){
+        temp=head;
+        int max=Integer.MIN_VALUE;
+        while(temp!=null){
+            if(temp.value>max){
+                max=temp.value;
+            }
+            temp=temp.next;
+        }
+        System.out.println("Maximum Element "+max);
+    }
+    void min(){
+        temp=head;
+        int min=Integer.MAX_VALUE;
+        while(temp!=null){
+            if(temp.value<min){
+                min=temp.value;
+            }
+            temp=temp.next;
+        }
+        System.out.println("Minimum Element "+min);
+    }
+    void reverse(){
+        Node prev=null,curr=head;
+        while(curr!=null){
+            Node next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;  
+        }
+        head=prev;
+    }
+     void display(){
+            temp=head;
+            for(int i=0;i<size;i++){
+                System.out.print(temp.value+" -> ");
+                temp=temp.next;
+           }
+    }
+}
+public class ll {
+    public static void main(String[] args) {
+        LinkedList ll=new LinkedList();
+        ll.insertLast(1);
+        ll.insertLast(2);
+        ll.insertLast(3);
+        ll.insertLast(4);
+        ll.insertLast(5);
+        ll.display();
+        System.out.println();
+        ll.reverse();
+        ll.display();
+    }
+}
