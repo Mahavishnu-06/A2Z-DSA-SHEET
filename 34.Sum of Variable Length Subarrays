@@ -1,0 +1,22 @@
+class Solution {
+    public int subarraySum(int[] nums) {
+        int n=nums.length,sum=0,start=0;
+        int ps[]=new int[n];
+        ps[0]=nums[0];
+        for(int i=1;i<n;i++){
+            ps[i]=ps[i-1]+nums[i];
+        }
+        for(int i=0;i<n;i++){
+            start=Math.max(0,i-nums[i]);
+            sum+=Psum(start,i,ps);
+        }
+        return sum;
+    }
+    
+    public int Psum(int st,int end ,int ps[]){
+        if(st==0){
+            return ps[end];
+        }
+        return ps[end]-ps[st-1];
+    }
+}
