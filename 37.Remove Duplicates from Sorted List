@@ -1,0 +1,22 @@
+Approach: Use slow and fast pointers to find the middle node, while keeping a prev pointer to track the node before slow. Once the middle is found, remove it by linking prev.next to slow.next.
+
+Time Complexity: O(n) — the linked list is traversed only once using two pointers.
+
+Space Complexity: O(1) — only pointer variables are used, no extra data structures.
+
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        ListNode slow=head,fast=head,prev=head;
+        if(head.next==null){
+            head=null;
+            return head;
+        }
+        while(fast!=null && fast.next!=null){
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        prev.next=slow.next;
+        return head;
+    }
+}
