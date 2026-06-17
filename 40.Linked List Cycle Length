@@ -1,0 +1,25 @@
+Approach: Use Floyd’s Cycle Detection to find the meeting point of slow and fast pointers. Once they meet, traverse the cycle starting from the meeting node and count the number of nodes to get the cycle length.
+
+Time Complexity: O(n) — detecting the cycle and counting its length together take linear time.
+
+Space Complexity: O(1) — only pointer variables and a counter are used, no extra data structures.
+
+public class Solution{
+    public int lengthOfCycle(ListNode head){
+        ListNode slow=head,fast=head;
+        while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                int size=1;
+                ListNode temp=slow.next;
+                while(temp!=fast){
+                    size++;
+                    temp=temp.next;
+                }
+                return size;
+            }
+        }
+        return 0;
+    }
+}
