@@ -1,0 +1,19 @@
+Approach: Use Floyd’s Cycle Detection (Tortoise and Hare). Move slow by one step and fast by two steps; if they meet, a cycle exists, otherwise reach null.
+
+Time Complexity: O(n) — in the worst case, the pointers traverse the linked list once before meeting or reaching the end.
+
+Space Complexity: O(1) — only two pointer variables are used, no extra data structures.
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head,fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+}
