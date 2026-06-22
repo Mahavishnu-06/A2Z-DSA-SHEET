@@ -1,0 +1,29 @@
+Approach: Traverse the linked list and separate nodes into odd-indexed and even-indexed lists using two dummy nodes. Finally, connect the odd list with the even list and return the head of the merged list.
+
+Time Complexity: O(n) — each node is visited exactly once.
+
+Space Complexity: O(1) — only a few pointer variables are used; nodes are rearranged in-place without extra storage.
+
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode odd=new ListNode(0);
+        ListNode even=new ListNode(-1);
+        ListNode temp=odd;
+        ListNode temp1=even;
+        int size=0;
+        while(head!=null){
+            if(size%2==0){
+                odd.next=head;
+                odd=odd.next;
+            }else{
+                even.next=head;
+                even=even.next;
+            }
+            head=head.next;
+            size++;
+        }
+        even.next=null;
+        odd.next=temp1.next;
+        return temp.next;
+    }
+}
