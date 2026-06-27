@@ -1,0 +1,44 @@
+Approach: Find the lengths of both linked lists, align them by moving the longer list ahead, then traverse both lists together until the intersection node is found.
+
+Time Complexity: O(n + m) — both linked lists are traversed to calculate lengths and then once more to find the intersection.
+
+Space Complexity: O(1) — only pointer variables and counters are used, no extra data structures.
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int len1=1,len2=1;
+        ListNode temp1=headA,temp2=headB;
+        while(temp1!=null){
+            temp1=temp1.next;
+            len1++;
+        }
+         while(temp2!=null){
+            temp2=temp2.next;
+            len2++;
+        }
+        while(len1>len2){
+            headA=headA.next;
+            len1--;
+        }
+        while(len2>len1){
+            headB=headB.next;
+            len2--;
+        }
+        ListNode ans=null;
+        while(headA!=null){
+            if(headA==headB){
+                ans=headA;
+                break;
+            }
+            headA=headA.next;
+            headB=headB.next;
+        }
+        return ans;
+        ListNode p1=headA,p2=headB;
+        while(p1!=p2){
+            p1=(p1==null)?headB:p1.next;
+             p2=(p2==null)?headA:p2.next;
+        }
+        return p2;
+    }
+}
