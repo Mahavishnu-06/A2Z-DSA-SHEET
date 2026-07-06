@@ -1,0 +1,77 @@
+Approach: Traverse both linked lists simultaneously, add corresponding digits along with the carry, create a new node for the digit, and continue until both lists and the carry are exhausted.
+
+Time Complexity: O(max(n, m)) — each node from both linked lists is processed exactly once.
+
+Space Complexity: O(max(n, m)) — a new linked list is created to store the result.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    // public ListNode reverse(ListNode head){
+    //     ListNode prev=null,next=null;
+    //     while(head!=null){
+    //         next=head.next;
+    //         head.next=prev;
+    //         prev=head;
+    //         head=next;
+    //     }
+    //     return prev;
+    // }
+    // public int sum(ListNode head){
+    //     int sum=0;
+    //     while(head!=null){
+    //         sum=sum*10+head.val;
+    //         head=head.next;
+    //     }
+    //     return sum;
+    // }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry=0;
+        ListNode dummy=new ListNode(0);
+        ListNode curr=dummy;
+        while(l1!=null || l2!=null ||carry==1){
+            int sum=0;
+            if(l1!=null){
+               sum+=l1.val;
+               l1=l1.next;
+            }
+
+            if(l2!=null){
+                sum+=l2.val;
+                l2=l2.next;
+            }
+
+            sum+=carry;
+            carry=sum/10;
+            ListNode node=new ListNode(sum%10);
+            curr.next=node;
+            curr=curr.next;
+        }
+        return dummy.next;
+
+        // ListNode list1=reverse(l1);
+        // ListNode list2=reverse(l2);
+        // int ans=sum(list1)+sum(list2);
+        // ListNode finalans=new ListNode(0);
+        // if(ans==0){
+        //     return finalans;
+        // }
+        // ListNode dummy=finalans;
+        // int rem=0;
+        // while(ans!=0){
+        //     rem=ans%10;
+        //     dummy.next= new ListNode(rem);
+        //     dummy=dummy.next;
+        //     ans=ans/10;
+        // }
+        // return finalans.next;
+    }
+}
