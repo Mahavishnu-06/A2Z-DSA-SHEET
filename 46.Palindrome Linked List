@@ -1,0 +1,43 @@
+Approach: Find the middle of the linked list using slow and fast pointers, reverse the second half, then compare both halves node by node to check if the list is a palindrome.
+
+Time Complexity: O(n) — finding the middle, reversing the second half, and comparing both halves each take linear time.
+
+Space Complexity: O(1) — only pointer variables are used, no extra data structures.
+
+class Solution {
+    public ListNode middle(ListNode head){
+        ListNode slow=head,fast=head,prev=null;
+        while(fast!=null && fast.next!=null){
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        prev.next=null;
+        return slow;
+    }
+     public ListNode reverse(ListNode head){
+        ListNode curr=head,prev=null,next=null;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+     public boolean isPalindrome(ListNode head){
+          if(head==null ||head.next==null){
+            return true;
+          }
+          ListNode middle=middle(head);
+          ListNode reverse=reverse(middle);
+          while(head!=null){
+            if(head.val!=reverse.val){
+                return false;
+            }
+            head=head.next;
+            reverse=reverse.next;
+          }
+          return true;
+     }
+}
