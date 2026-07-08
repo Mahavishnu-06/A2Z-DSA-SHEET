@@ -1,0 +1,39 @@
+Approach: Reverse the linked list, add one starting from the least significant digit while handling carry, then reverse the list again to restore the original order.
+
+Time Complexity: O(n) — the list is traversed for reversing, adding one, and reversing again.
+
+Space Complexity: O(n) — a new linked list is created to store the updated result.
+
+
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode prev=null,next=null;
+        while(head!=null){
+            next=head.next;
+            head.next=prev;
+            prev=head;
+            head=next;
+        }
+        return prev;
+    }
+    public ListNode addOne(ListNode head) {
+        ListNode rev=reverse(head);
+        ListNode dummy=new ListNode(0);
+        ListNode curr=dummy;
+       int carry=1;
+        while(rev!=null||carry==1){
+            int sum=0;
+            if(rev!=null){
+            sum+=rev.val;
+            rev=rev.next;
+            }
+            sum+=carry;
+            carry=sum/10;
+            ListNode node=new ListNode(sum%10);
+            curr.next=node;
+            curr=curr.next;
+        }
+        ListNode ans=reverse(dummy.next);
+        return ans;
+    }
+}
