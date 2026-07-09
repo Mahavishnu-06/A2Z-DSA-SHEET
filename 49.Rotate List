@@ -1,0 +1,46 @@
+Approach: Rotate the linked list to the right by moving the last node to the front, repeating the process `k % length` times.
+
+Time Complexity: O(n × (k % n)) — each rotation traverses the list to find the last node, repeated `k % n` times.
+
+Space Complexity: O(1) — only pointer variables are used, no extra data structures.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int length(ListNode head){
+        int len=0;
+        while(head!=null){
+            head=head.next;
+            len++;
+        }
+        return len;
+    }
+    public ListNode rotateRight(ListNode head, int k) {
+        int len=length(head);
+        if(head==null || head.next==null){
+            return head;
+        }
+        int rotation=k%len;
+        ListNode head1=null,prev=null,tail=null;
+        for(int i=0;i<rotation;i++){
+            head1=head;
+            while(head1.next!=null){
+                prev=head1;
+                head1=head1.next;
+                tail=head1;
+            }
+            prev.next=null;
+            tail.next=head;
+            head=tail;
+        }
+        return head;
+    }
+}
