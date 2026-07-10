@@ -1,0 +1,32 @@
+Approach: Find the length of the linked list, calculate the position of the node to remove from the beginning, then traverse to the previous node and update its next pointer.
+
+Time Complexity: O(n) — one traversal to find the length and another to remove the target node.
+
+Space Complexity: O(1) — only pointer variables and counters are used.
+
+class Solution {
+    public int length(ListNode head){
+        int len=0;
+        while(head!=null){
+            head=head.next;
+            len++;
+        }
+        return len;
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int len=length(head);
+        int pos=len-n;
+        ListNode curr=head;
+        for(int i=0;i<pos-1;i++){
+             curr=curr.next;
+        }
+        if(len==1){
+            return null;
+        }
+        if(len==n){
+            head=head.next;
+        }
+        curr.next=curr.next.next;
+        return head;
+    }
+}
