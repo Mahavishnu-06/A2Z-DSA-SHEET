@@ -1,0 +1,47 @@
+package STACKANDQUEUE;
+class StImplementaion{
+    int st[]=new int[10];
+    int top=-1;
+    void push(int val){
+        if(top==st.length-1){
+            System.out.println("Stack Overflow");
+            return;
+        }
+        top=top+1;
+        st[top]=val;
+    }
+    void pop(){
+        if(top==-1){
+            System.out.println("Stack underflow");
+            return;
+        }
+        top=top-1;
+    }
+    void peek(){
+        if(top==-1){
+             System.out.println("Stack underflow");
+            return;
+        }
+        System.out.println("Top element is "+st[top]);
+    }
+    void size(){
+         if(top==-1){
+             System.out.println("Stack underflow");
+            return;
+        }
+        System.out.println("Size of the satck is "+(top+1));
+    }
+
+}
+class StusingArray {
+    public static void main(String[] args) {
+         StImplementaion st=new StImplementaion();
+         st.push(1);
+         st.push(2);
+         st.push(3);
+         st.pop();
+         st.peek();
+         st.size();
+    }
+}
+
