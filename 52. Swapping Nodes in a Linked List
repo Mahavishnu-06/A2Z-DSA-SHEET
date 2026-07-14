@@ -1,0 +1,59 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int length(ListNode head){
+        int len=0;
+        while(head!=null){
+            head=head.next;
+            len++;
+        }
+        return len;
+    }
+    public ListNode swapNodes(ListNode head, int k) {
+       int count=0;
+       int start=k;
+       int end=length(head)-(k-1);
+       ListNode head1=head;
+       ListNode startNode=null,endNode=null;
+        while(head!=null){
+            count++;
+            if(count==start){
+               startNode=head;
+            }
+            if(count==end){
+                endNode=head;
+            }
+            head=head.next;
+        } 
+        int temp=startNode.val;
+        startNode.val=endNode.val;
+        endNode.val=temp;
+        return head1;
+    }
+    //   int n=length(head);
+    //   int arr[]=new int[n];
+    //   int index=0;
+    //   while(head!=null){
+    //      arr[index++]=head.val;
+    //      head=head.next;
+    //   }
+    //   int endVal=arr[n-k];
+    //   int startVal=arr[k-1];
+    //   arr[k-1]=endVal;
+    //   arr[n-k]=startVal;
+    //   ListNode dummy=new ListNode(-1);
+    //   ListNode curr=dummy;
+    //   for(int i:arr){
+    //     curr.next=new ListNode(i);
+    //     curr=curr.next;
+    //   }
+    //   return dummy.next;
+}
