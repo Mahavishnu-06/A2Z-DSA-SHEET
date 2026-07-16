@@ -1,0 +1,22 @@
+class Solution {
+    public int[][] solution(int[][] m){
+        int arr[][]=new int[m.length][m.length];
+        int row=0,col=0;
+        for(int i=0;i<m.length;i++){
+            col=0;
+            for(int j=m.length-1;j>=0;j--){
+                arr[row][col++]=m[j][i];
+            }
+            row++;
+        }
+        return arr;
+    }
+    public void rotate(int[][] m) {
+       int[][] arr = solution(m);
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m.length; j++) {
+                m[i][j] = arr[i][j];
+            }
+        }
+    }
+}
