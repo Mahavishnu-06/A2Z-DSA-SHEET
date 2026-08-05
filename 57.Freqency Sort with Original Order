@@ -1,0 +1,31 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        LinkedHashMap<Integer,Integer> freq=new LinkedHashMap<>();
+        for(int i:arr){
+            freq.put(i,freq.getOrDefault(i,0)+1);
+        }
+        while(!freq.isEmpty()){
+            int max=0,key=0;
+            for(int i:freq.keySet()){
+                if(freq.get(i)>max){
+                    max=freq.get(i);
+                    key=i;
+                }
+            }
+            solution(max,key);
+            freq.remove(key);
+        }
+    }
+    public static void solution(int max,int key){
+        for(int i=1;i<=max;i++){
+            System.out.print(key+" ");
+        }
+    }
+}
