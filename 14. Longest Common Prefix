@@ -1,0 +1,28 @@
+class Solution {
+        public boolean solution(String arr[],int index){
+            for(String str:arr){
+            if(str.length()<index){
+                return false;
+            }
+            }
+            String ch=arr[0].substring(0,index);
+            for(int i=1;i<arr.length;i++){
+             
+                if(arr[i].substring(0,index).equals(ch)){
+
+                }else{
+                    return false;
+                }
+            }
+            return true;
+        }
+        public String longestCommonPrefix(String[] strs) {
+            int index=1;
+             String ans="";
+             while(solution(strs,index)==true){
+                  ans=strs[0].substring(0,index);
+                  index++;
+             }
+             return ans;
+        }
+}
